@@ -1,0 +1,62 @@
+[
+  {
+    "id": "boat",
+    "titleKey": "track.boat.title",
+    "file": "/assets/town-audio/boat.ogg",
+    "authorKey": "track.ninja.author",
+    "source": "https://pixel-boy.itch.io/ninja-adventure-asset-pack",
+    "sourceKey": "track.ninja.source",
+    "licenseKey": "track.ninja.license",
+    "loop": true
+  },
+  {
+    "id": "village",
+    "titleKey": "track.village.title",
+    "file": "/assets/town-audio/village.ogg",
+    "authorKey": "track.ninja.author",
+    "source": "https://pixel-boy.itch.io/ninja-adventure-asset-pack",
+    "sourceKey": "track.ninja.source",
+    "licenseKey": "track.ninja.license",
+    "loop": true
+  },
+  {
+    "id": "sunny",
+    "titleKey": "track.sunny.title",
+    "file": "/assets/town-audio/sunny.ogg",
+    "authorKey": "track.ninja.author",
+    "source": "https://pixel-boy.itch.io/ninja-adventure-asset-pack",
+    "sourceKey": "track.ninja.source",
+    "licenseKey": "track.ninja.license",
+    "loop": true
+  },
+  {
+    "id": "quiet",
+    "titleKey": "track.quiet.title",
+    "file": "/assets/town-audio/quiet.ogg",
+    "authorKey": "track.ninja.author",
+    "source": "https://pixel-boy.itch.io/ninja-adventure-asset-pack",
+    "sourceKey": "track.ninja.source",
+    "licenseKey": "track.ninja.license",
+    "loop": true
+  },
+  {
+    "id": "bad-apple-jpop",
+    "titleKey": "track.jpop.title",
+    "file": "/assets/town-audio/bad-apple-jpop.ogg",
+    "authorKey": "track.owner.author",
+    "source": "/pages/credits/#owner-audio",
+    "sourceKey": "track.owner.source",
+    "licenseKey": "track.owner.license",
+    "loop": true
+  },
+  {
+    "id": "bad-apple-reggae",
+    "titleKey": "track.reggae.title",
+    "file": "/assets/town-audio/bad-apple-reggae.ogg",
+    "authorKey": "track.owner.author",
+    "source": "/pages/credits/#owner-audio",
+    "sourceKey": "track.owner.source",
+    "licenseKey": "track.owner.license",
+    "loop": true
+  }
+]
