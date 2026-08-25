@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#111722" />
+    <meta name="description" content="一座使用 Ninja Adventure 素材构建的七房间独立像素地牢。" />
+    <link rel="preload" href="/assets/ninja-v1/characters/ninja-blue-source.png" as="image" />
+    <link rel="preload" href="/assets/ninja-v1/ui/ninja-adventure.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href="./dungeon.css" />
+    <title>冒险洞穴：旅灯试炼</title>
+  </head>
+  <body>
+    <main class="dungeon-shell">
+      <canvas id="dungeon" width="960" height="540" tabindex="0" aria-label="冒险洞穴游戏画面" data-i18n-aria="dungeon.canvasLabel"></canvas>
+
+      <header class="game-hud" aria-label="地牢状态" data-i18n-aria="dungeon.statusLabel">
+        <div class="hud-brand">
+          <strong data-i18n="dungeon.title">冒险洞穴：旅灯试炼</strong>
+          <span id="room-label">1 / 7</span>
+        </div>
+        <div class="meter"><span data-i18n="dungeon.hp">生命</span><i><b id="hp-bar"></b></i></div>
+        <div class="meter stamina"><span data-i18n="dungeon.stamina">气力</span><i><b id="stamina-bar"></b></i></div>
+        <div class="shard-count"><img src="/assets/ninja-v1/items/gem-yellow.png" alt="" /><span id="shard-count">0 / 3</span></div>
+        <button id="mute-button" class="ninja-button" type="button" data-i18n="dungeon.mute">声音</button>
+        <button id="pause-button" class="ninja-button" type="button" data-i18n="dungeon.pause">暂停</button>
+      </header>
+
+      <section id="start-screen" class="overlay">
+        <div class="ninja-panel start-card">
+          <nav class="locale-switch" aria-label="Language">
+            <button type="button" data-locale="zh" aria-pressed="true">中</button>
+            <button type="button" data-locale="ja" aria-pressed="false">日</button>
+            <button type="button" data-locale="en" aria-pressed="false">EN</button>
+          </nav>
+          <img class="start-emblem" src="/assets/ninja-v1/items/gold-key.png" alt="" />
+          <p class="kicker" data-i18n="dungeon.duration">预计 25～35 分钟</p>
+          <h1 data-i18n="dungeon.title">冒险洞穴：旅灯试炼</h1>
+          <p data-i18n="dungeon.subtitle">七个房间 · 三枚旅灯碎片 · 一位守门者</p>
+          <p class="control-copy" data-i18n="dungeon.controls">WASD / 方向键移动 · X 攻击 · C 冲刺 · 空格互动</p>
+          <div class="start-actions">
+            <button id="continue-game" class="ninja-button primary" type="button" data-i18n="dungeon.continue" hidden>从检查点继续</button>
+            <button id="new-game" class="ninja-button" type="button" data-i18n="dungeon.start">开始新试炼</button>
+            <a class="ninja-button" href="/" data-i18n="dungeon.back">返回旅灯镇</a>
+          </div>
+          <p class="credit" data-i18n="dungeon.credit">Ninja Adventure Asset Pack · Pixel-Boy & AAA · CC0 1.0</p>
+        </div>
+      </section>
+
+      <section id="message-panel" class="message-panel ninja-panel" aria-live="polite">
+        <p id="room-kicker" class="kicker"></p>
+        <h2 id="room-title"></h2>
+        <p id="room-hint"></p>
+      </section>
+
+      <section id="pause-screen" class="overlay" hidden>
+        <div class="ninja-panel compact-card">
+          <h2 data-i18n="dungeon.pause">暂停</h2>
+          <button id="resume-game" class="ninja-button primary" type="button" data-i18n="dungeon.resume">继续</button>
+          <button id="restart-game" class="ninja-button" type="button" data-i18n="dungeon.restart">重新开始</button>
+          <a class="ninja-button" href="/" data-i18n="dungeon.back">返回旅灯镇</a>
+        </div>
+      </section>
+
+      <section id="defeat-screen" class="overlay" hidden>
+        <div class="ninja-panel compact-card">
+          <img src="/assets/ninja-v1/items/heart.png" alt="" />
+          <h2 data-i18n="dungeon.defeat">灯火熄灭</h2>
+          <button id="retry-game" class="ninja-button primary" type="button" data-i18n="dungeon.retry">从检查点重试</button>
+          <a class="ninja-button" href="/" data-i18n="dungeon.back">返回旅灯镇</a>
+        </div>
+      </section>
+
+      <section id="victory-screen" class="overlay" hidden>
+        <div class="ninja-panel victory-card">
+          <img src="/assets/ninja-v1/items/gem-yellow.png" alt="" />
+          <p class="kicker" data-i18n="dungeon.victory">旅灯重新点亮</p>
+          <h2 data-i18n="dungeon.victory">旅灯重新点亮</h2>
+          <p data-i18n="dungeon.victoryCopy">守门者收刀让路。你带着三枚碎片走出了洞穴。</p>
+          <dl>
+            <div><dt data-i18n="dungeon.best">最佳用时</dt><dd id="best-time">--:--</dd></div>
+            <div><dt data-i18n="dungeon.clears">通关次数</dt><dd id="clear-count">0</dd></div>
+          </dl>
+          <button id="play-again" class="ninja-button primary" type="button" data-i18n="dungeon.playAgain">再次挑战</button>
+          <a class="ninja-button" href="/" data-i18n="dungeon.back">返回旅灯镇</a>
+        </div>
+      </section>
+
+      <div id="toast" class="game-toast" aria-live="polite" hidden></div>
+
+      <nav class="touch-controls" aria-label="触屏操作" data-i18n-aria="dungeon.touchLabel">
+        <div class="touch-dpad">
+          <button type="button" data-key="ArrowUp" aria-label="向上" data-i18n-aria="dungeon.moveUp">▲</button>
+          <button type="button" data-key="ArrowLeft" aria-label="向左" data-i18n-aria="dungeon.moveLeft">◀</button>
+          <button type="button" data-key="ArrowDown" aria-label="向下" data-i18n-aria="dungeon.moveDown">▼</button>
+          <button type="button" data-key="ArrowRight" aria-label="向右" data-i18n-aria="dungeon.moveRight">▶</button>
+        </div>
+        <div class="touch-actions">
+          <button type="button" data-key="KeyC" aria-label="冲刺" data-i18n-aria="dungeon.dashAction">C</button>
+          <button type="button" data-key="KeyX" aria-label="攻击" data-i18n-aria="dungeon.attackAction">X</button>
+          <button type="button" data-key="Space" aria-label="互动" data-i18n-aria="dungeon.interactAction">A</button>
+        </div>
+      </nav>
+
+      <audio id="dungeon-music" src="/assets/ninja-v1/audio/music/dungeon.ogg" preload="none" loop></audio>
+    </main>
+    <script type="module" src="./dungeon.ts"></script>
+  </body>
+</html>

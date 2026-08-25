@@ -2,121 +2,126 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Young E. 的个人主页——工程师、构建者，关注 AI、开放系统与链上市场。"
-    />
-    <meta name="theme-color" content="#f3f7fa" />
-    <meta name="color-scheme" content="light" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="description" content="Young E. 的像素 RPG 个人主页：从旅人码头进入旅灯镇，探索个人信息、兴趣和一座独立冒险洞穴。" />
+    <meta name="theme-color" content="#172638" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Young E. — Engineer & Builder" />
-    <meta
-      property="og:description"
-      content="把复杂问题压缩成清晰的模型，再把它变成可靠、可用的工具。"
-    />
+    <meta property="og:title" content="旅灯镇 · Young E." />
+    <meta property="og:description" content="一座可以走进去的个人主页。" />
     <meta property="og:url" content="https://youngy620.github.io/" />
     <link rel="canonical" href="https://youngy620.github.io/" />
-    <link rel="icon" href="./mark.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="./script.js" defer></script>
-    <title>Young E. — Engineer & Builder</title>
+    <link rel="icon" href="/assets/ninja-v1/items/gem-yellow.png" />
+    <link rel="preload" href="/assets/ninja-v1/ui/ninja-adventure.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/assets/ninja-v1/characters/ninja-blue-source.png" as="image" />
+    <link rel="preload" href="/map/world-flat.png" as="image" />
+    <link rel="stylesheet" href="/assets/ninja-v1/ui/rpgjs-reset.css" />
+    <link rel="stylesheet" href="/src/world/world.css" />
+    <title>旅灯镇 · Young E.</title>
   </head>
   <body>
-    <a class="skip-link" href="#main">跳到主要内容</a>
+    <a class="skip-link" href="#world-shell">跳到游戏</a>
 
-    <header class="site-header" aria-label="页首">
-      <a class="wordmark" href="#top" aria-label="回到页首">YE<span>.</span></a>
-      <nav aria-label="页面导航">
-        <a href="#about">关于</a>
-        <a href="#education">教育</a>
-        <a href="#contact">联系</a>
-      </nav>
-    </header>
-
-    <main id="main">
-      <section class="hero" id="top" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow">Engineer · Builder</p>
-          <h1 id="hero-title">
-            <span>Young</span>
-            <span>E.</span>
-          </h1>
-          <p class="hero-intro">
-            我关注 AI、开放系统与链上市场，喜欢把复杂问题压缩成清晰的模型，<br class="desktop-break" />
-            再把它变成可靠、可用的工具。
-          </p>
+    <div id="loading-screen" class="loading-screen" role="dialog" aria-modal="true" aria-labelledby="loading-title">
+      <div class="loading-screen__mist" aria-hidden="true"></div>
+      <section class="loading-card">
+        <nav class="locale-switch loading-locale-switch" aria-label="Language">
+          <button type="button" data-locale="zh" aria-pressed="true">中</button>
+          <button type="button" data-locale="ja" aria-pressed="false">日</button>
+          <button type="button" data-locale="en" aria-pressed="false">EN</button>
+        </nav>
+        <p id="loading-eyebrow" class="loading-card__eyebrow">Young E. presents</p>
+        <h1 id="loading-title">旅灯镇</h1>
+        <p id="loading-subtitle" class="loading-card__subtitle">一座可以走进去的个人主页</p>
+        <div class="loading-card__route" aria-hidden="true">
+          <span id="route-dock" class="route__dock">旅人码头</span><i></i><span id="route-town" class="route__town">小镇</span><i></i><span id="route-cave" class="route__cave">冒险洞穴</span>
         </div>
-
-        <div class="monogram" aria-hidden="true">
-          <svg viewBox="0 0 500 620" role="presentation">
-            <path class="monogram-quiet" d="M68 58 250 296 432 58" />
-            <path class="monogram-quiet" d="M250 296v266" />
-            <path class="monogram-trace" pathLength="1" d="M68 58 250 296 432 58" />
-            <path class="monogram-trace monogram-trace-stem" pathLength="1" d="M250 296v266" />
-            <circle cx="250" cy="296" r="9" />
-          </svg>
-          <span>Y / 620</span>
-        </div>
-
-        <a class="scroll-cue" href="#about">
-          <span>继续阅读</span>
-          <span aria-hidden="true">↓</span>
-        </a>
+        <div class="loading-progress" aria-label="加载进度"><span id="loading-progress-bar"></span></div>
+        <p id="loading-status" class="loading-status" aria-live="polite">正在收拢海风…</p>
+        <button id="enter-town" class="pixel-button" type="button" disabled>进入小镇</button>
+        <p id="loading-hint" class="loading-card__hint">方向键 / WASD 移动 · 空格交互 · X 挥刀</p>
+        <section class="loading-credits" aria-labelledby="loading-credits-title">
+          <p id="loading-credits-kicker" class="loading-credits__kicker">致谢 · 工具作者</p>
+          <h2 id="loading-credits-title">这座小镇由这些作者点亮</h2>
+          <div class="loading-credits__links">
+            <a id="loading-credit-ninja" href="https://twitter.com/2Pblog1" target="_blank" rel="noopener noreferrer">Pixel-Boy · Twitter ↗</a>
+            <a id="loading-credit-jacquard" href="https://twitter.com/_kzr" target="_blank" rel="noopener noreferrer">Keijiro · Twitter ↗</a>
+          </div>
+          <a id="loading-credit-full" class="loading-credits__full" href="/pages/credits/" target="_blank" rel="noopener noreferrer">查看完整致谢 ↗</a>
+        </section>
       </section>
+    </div>
 
-      <div class="content-shell">
-        <section class="section about" id="about" aria-labelledby="about-title">
-          <p class="section-label">关于</p>
-          <div class="section-content">
-            <h2 id="about-title">在想法与实现之间，<br />保持一条短路径。</h2>
-            <p>
-              你好，我是 Young。我对技术如何拓展人的判断力很感兴趣，也持续探索新的协作方式、市场机制与软件形态。
-              工作之外，我享受阅读、思考，以及从零开始做出真正能运行的东西。
-            </p>
-          </div>
-        </section>
+    <main id="world-shell" class="world-shell" aria-label="旅灯镇主世界">
+      <div id="rpg" tabindex="0"></div>
 
-        <section class="section education" id="education" aria-labelledby="education-title">
-          <p class="section-label">教育</p>
-          <div class="section-content education-row">
-            <div>
-              <h2 id="education-title">清华大学</h2>
-              <p>软件工程</p>
-            </div>
-            <p class="education-mark" aria-hidden="true">THU</p>
-          </div>
-        </section>
+      <header class="world-hud" aria-label="游戏状态">
+        <div class="place-chip"><span aria-hidden="true">◆</span><strong id="place-name">旅人码头</strong></div>
+        <nav class="locale-switch world-locale-switch" aria-label="Language">
+          <button type="button" data-locale="zh" aria-pressed="true">中</button>
+          <button type="button" data-locale="ja" aria-pressed="false">日</button>
+          <button type="button" data-locale="en" aria-pressed="false">EN</button>
+        </nav>
+        <button id="help-toggle" class="hud-button" type="button" aria-controls="help-panel" aria-expanded="false">操作</button>
+        <button id="music-toggle" class="hud-button" type="button" aria-controls="music-panel" aria-expanded="false">广播</button>
+        <a id="credits-link" class="hud-button hud-link" href="/pages/credits/" target="_blank" rel="noopener noreferrer">致谢</a>
+      </header>
 
-        <section class="section contact" id="contact" aria-labelledby="contact-title">
-          <p class="section-label">找到我</p>
-          <div class="section-content">
-            <h2 id="contact-title">保持联系。</h2>
-            <div class="social-list">
-              <a href="https://github.com/YoungY620" target="_blank" rel="noreferrer">
-                <span class="social-name">GitHub</span>
-                <span class="social-handle">YoungY620</span>
-                <span class="social-arrow" aria-hidden="true">↗</span>
-              </a>
-              <a href="https://twitter.com/Bobby___Young" target="_blank" rel="noreferrer">
-                <span class="social-name">Twitter</span>
-                <span class="social-handle">@Bobby___Young</span>
-                <span class="social-arrow" aria-hidden="true">↗</span>
-              </a>
-              <a href="https://www.zhihu.com/people/bob-71-97" target="_blank" rel="noreferrer">
-                <span class="social-name">知乎</span>
-                <span class="social-handle">羊阳杨</span>
-                <span class="social-arrow" aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </div>
-        </section>
+      <aside id="help-panel" class="pixel-panel help-panel" hidden>
+        <button class="panel-close" type="button" data-close-panel="help-panel" aria-label="关闭操作说明">×</button>
+        <h2 id="help-title">旅行手册</h2>
+        <dl>
+          <div><dt id="help-move">移动</dt><dd id="help-move-key">方向键 / WASD</dd></div>
+          <div><dt id="help-action">交互</dt><dd id="help-action-key">空格 / Enter</dd></div>
+          <div><dt id="help-attack">挥刀</dt><dd>X</dd></div>
+        </dl>
+        <p id="help-copy">看到头顶浮动的菱形标记时，靠近并按交互键。链接会在新标签页打开。</p>
+      </aside>
+
+      <aside id="music-panel" class="pixel-panel music-panel" hidden aria-labelledby="music-title">
+        <button class="panel-close" type="button" data-close-panel="music-panel" aria-label="关闭广播台">×</button>
+        <p id="music-kicker" class="panel-kicker">旅灯镇广播台</p>
+        <h2 id="music-title">今日播送</h2>
+        <p id="track-title" class="track-title">尚未播放</p>
+        <div class="music-controls">
+          <button id="prev-track" type="button" aria-label="上一首">◀</button>
+          <button id="play-track" type="button">播放</button>
+          <button id="next-track" type="button" aria-label="下一首">▶</button>
+        </div>
+        <label class="volume-row" for="music-volume"><span id="volume-label">音量</span><input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.55" /></label>
+        <div class="music-secondary">
+          <button id="mute-track" type="button">静音</button>
+          <button id="loop-track" type="button" aria-pressed="true">单曲循环：开</button>
+          <button id="reset-track" type="button">恢复默认</button>
+        </div>
+        <ol id="track-list" class="track-list"></ol>
+        <p id="track-credit" class="track-credit">音乐来自 Ninja Adventure Asset Pack · CC0 1.0</p>
+      </aside>
+
+      <div id="link-dialog" class="pixel-panel link-dialog" hidden role="dialog" aria-modal="true" aria-labelledby="link-dialog-title">
+        <p id="link-dialog-kicker" class="panel-kicker"></p>
+        <h2 id="link-dialog-title"></h2>
+        <p id="link-dialog-copy"></p>
+        <div id="link-dialog-actions" class="dialog-actions"></div>
+        <button id="close-link-dialog" class="text-button" type="button">留在镇上</button>
       </div>
+
+      <div id="toast" class="toast" aria-live="polite" hidden></div>
+
+      <nav class="touch-controls" aria-label="触屏操作">
+        <div class="touch-dpad">
+          <button type="button" data-key="ArrowUp" aria-label="向上">▲</button>
+          <button type="button" data-key="ArrowLeft" aria-label="向左">◀</button>
+          <button type="button" data-key="ArrowDown" aria-label="向下">▼</button>
+          <button type="button" data-key="ArrowRight" aria-label="向右">▶</button>
+        </div>
+        <div class="touch-actions">
+          <button type="button" data-key="KeyX" aria-label="挥刀">X</button>
+          <button type="button" data-key="Space" aria-label="交互">A</button>
+        </div>
+      </nav>
     </main>
 
-    <footer>
-      <p>© <span id="year">2026</span> Young E.</p>
-      <a href="#top">回到顶部 ↑</a>
-    </footer>
+    <audio id="town-audio" preload="none"></audio>
+    <script type="module" src="/src/entry.ts"></script>
   </body>
 </html>

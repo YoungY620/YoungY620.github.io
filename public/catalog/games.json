@@ -1,0 +1,18 @@
+[
+  {
+    "id": "dungeon-one",
+    "title": "冒险洞穴：旅灯试炼",
+    "kind": "internal",
+    "url": "/games/dungeon-one/",
+    "duration": "约 30 分钟",
+    "status": "available"
+  },
+  {
+    "id": "github-games",
+    "title": "GitHub 游戏实验",
+    "kind": "external",
+    "url": "https://github.com/YoungY620",
+    "duration": "外部链接",
+    "status": "external"
+  }
+]

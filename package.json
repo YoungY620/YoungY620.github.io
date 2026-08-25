@@ -1,0 +1,32 @@
+{
+  "name": "wayfarer-lantern-town",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run generate && vite",
+    "generate": "node scripts/generate-pages.mjs",
+    "build": "npm run generate && vite build && vite build --config vite.dungeon.config.ts",
+    "preview": "vite preview --host 127.0.0.1",
+    "check": "node scripts/verify-i18n.mjs && node scripts/verify-world.mjs && tsc --noEmit && npm run build"
+  },
+  "dependencies": {
+    "@canvasengine/presets": "2.2.0",
+    "@rpgjs/client": "5.0.0-beta.33",
+    "@rpgjs/common": "5.0.0-beta.30",
+    "@rpgjs/server": "5.0.0-beta.33",
+    "@rpgjs/tiledmap": "5.0.0-beta.33",
+    "@rpgjs/ui-css": "5.0.0-beta.26",
+    "@rpgjs/vite": "5.0.0-beta.33",
+    "@signe/di": "^3.1.1",
+    "canvasengine": "2.2.0",
+    "path-browserify": "^1.0.1",
+    "pixi.js": "^8.19.0"
+  },
+  "devDependencies": {
+    "@canvasengine/compiler": "2.2.0",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.2"
+  }
+}

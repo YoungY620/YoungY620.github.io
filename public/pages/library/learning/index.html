@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#172638" />
+  <meta name="description" content="当前书页记录了构建这座静态 RPG 主页时确认的技术事实。" />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <title>学习记录 · 旅灯镇</title>
+</head>
+<body>
+  <a class="skip-link" href="#content" data-ui="skip">跳到正文</a>
+  <div class="page-sky" aria-hidden="true"></div>
+  <header class="page-header">
+    <a class="town-link" href="/">← <span data-ui="back">返回旅灯镇</span></a>
+    <nav class="locale-switch" aria-label="Language">
+      <button type="button" data-locale="zh" aria-pressed="true">中</button>
+      <button type="button" data-locale="ja" aria-pressed="false">日</button>
+      <button type="button" data-locale="en" aria-pressed="false">EN</button>
+    </nav>
+  </header>
+  <main id="content" class="page-layout">
+    <aside class="route-rail" aria-hidden="true">
+      <span class="route-rail__seal"><img src="/assets/ninja-v1/items/scroll.png" alt="" /></span>
+      <i></i><span>◆</span><i></i><span>≈</span>
+    </aside>
+    <article class="journal-panel">
+      <p class="journal-kicker" data-page="label">镇立图书馆 · 学习记录</p>
+      <img class="journal-icon" src="/assets/ninja-v1/items/scroll.png" alt="" />
+      <h1 data-page="title">学习记录</h1>
+      <p class="journal-intro" data-page="intro">当前书页记录了构建这座静态 RPG 主页时确认的技术事实。</p>
+      <div data-page="sections"><section class="log-section"><h2>RPGJS v5 standalone</h2><p>主世界把客户端和权威游戏逻辑放在同一浏览器进程中运行，因此无需常驻服务器；Tiled 地图仍保持清晰的地图、事件和碰撞分层。</p></section><section class="log-section"><h2>静态路径</h2><p>每个内容页和小游戏都有可直接访问的目录路径。构建阶段输出真实 index.html，避免依赖服务器回退规则。</p></section></div>
+      <div class="route-links" data-page="links"></div>
+    </article>
+  </main>
+  <footer class="page-footer">
+    <p data-ui="credits">Ninja Adventure Asset Pack · Pixel-Boy & AAA · CC0 1.0</p>
+    <a href="https://pixel-boy.itch.io/ninja-adventure-asset-pack" target="_blank" rel="noreferrer"><span data-ui="creditsLink">完整致谢</span> ↗</a>
+  </footer>
+  <script id="page-content" type="application/json">{"page":{"path":"library/learning","icon":"/assets/ninja-v1/items/scroll.png","label":{"zh":"镇立图书馆 · 学习记录","en":"Town library · Learning notes","ja":"町立図書館・学習記録"},"title":{"zh":"学习记录","en":"Learning notes","ja":"学習記録"},"intro":{"zh":"当前书页记录了构建这座静态 RPG 主页时确认的技术事实。","en":"These pages record technical facts confirmed while building this static RPG homepage.","ja":"このページは、静的 RPG ホームページを作る中で確認した技術事項を記録します。"},"sections":[{"title":{"zh":"RPGJS v5 standalone","en":"RPGJS v5 standalone","ja":"RPGJS v5 standalone"},"body":{"zh":"主世界把客户端和权威游戏逻辑放在同一浏览器进程中运行，因此无需常驻服务器；Tiled 地图仍保持清晰的地图、事件和碰撞分层。","en":"The main world runs client and authoritative game logic in the same browser process, so no persistent server is required. Tiled maps still preserve clean map, event, and collision layers.","ja":"メインワールドはクライアントとゲームロジックを同じブラウザ内で動かすため、常駐サーバーが不要です。Tiled マップでは地図・イベント・衝突を明確に分離できます。"}},{"title":{"zh":"静态路径","en":"Static paths","ja":"静的パス"},"body":{"zh":"每个内容页和小游戏都有可直接访问的目录路径。构建阶段输出真实 index.html，避免依赖服务器回退规则。","en":"Every content page and game has a directly addressable directory path. The build emits real index.html files instead of relying on server fallback rules.","ja":"各コンテンツページとゲームには直接アクセスできるディレクトリパスがあり、サーバーのフォールバックに頼らず実体の index.html を出力します。"}}]},"text":{"zh":{"back":"返回旅灯镇","route":"旅行日志","open":"在新标签页打开","credits":"Ninja Adventure Asset Pack · Pixel-Boy & AAA · CC0 1.0","skip":"跳到正文","town":"旅灯镇","creditsLink":"完整致谢"},"en":{"back":"Return to town","route":"Travel log","open":"Open in a new tab","credits":"Ninja Adventure Asset Pack · Pixel-Boy & AAA · CC0 1.0","skip":"Skip to content","town":"Wayfarer Lantern Town","creditsLink":"Full credits"},"ja":{"back":"旅灯町へ戻る","route":"旅の記録","open":"新しいタブで開く","credits":"Ninja Adventure Asset Pack · Pixel-Boy & AAA · CC0 1.0","skip":"本文へ移動","town":"旅灯町","creditsLink":"完全なクレジット"}}}</script>
+  <script type="module" src="/assets/site-page.js"></script>
+</body>
+</html>
