@@ -13,7 +13,7 @@ export function SiteCard({ site }: { site: Site }) {
         </div>
         <CardDescription className="leading-relaxed">{site.description}</CardDescription>
       </CardHeader>
-      <CardContent className="mt-auto text-sm text-muted-foreground">
+      <CardContent className="flex-1 text-sm text-muted-foreground">
         更新于 <time dateTime={site.updatedAt}>{site.updatedAt.slice(0, 10)}</time>
       </CardContent>
       <CardFooter className="flex flex-wrap gap-2">

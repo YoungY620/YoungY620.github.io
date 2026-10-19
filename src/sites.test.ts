@@ -7,6 +7,7 @@ const repo = (overrides: Partial<GithubRepo> = {}): GithubRepo => ({
   name: "riverlight",
   description: "Pixel poker",
   has_pages: true,
+  private: false,
   updated_at: "2026-10-19T08:00:00Z",
   language: "TypeScript",
   html_url: "https://github.com/YoungY620/riverlight",
@@ -18,8 +19,9 @@ test("builds root and project Pages URLs", () => {
   assert.equal(siteUrl("riverlight"), "https://youngy620.github.io/riverlight/");
 });
 
-test("normalizes enabled sites and excludes repositories without Pages", () => {
+test("normalizes public Pages and excludes private or disabled repositories", () => {
   assert.equal(normalizeRepo(repo({ has_pages: false })), null);
+  assert.equal(normalizeRepo(repo({ private: true })), null);
   const sites = normalizeRepos([
     repo({ updated_at: "2026-10-18T08:00:00Z" }),
     repo({ name: "other", description: null, updated_at: "2026-10-19T08:00:00Z" }),

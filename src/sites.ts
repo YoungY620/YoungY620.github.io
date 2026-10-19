@@ -5,6 +5,7 @@ export interface GithubRepo {
   name: string;
   description: string | null;
   has_pages: boolean;
+  private: boolean;
   updated_at: string;
   language: string | null;
   html_url: string;
@@ -24,7 +25,7 @@ export function siteUrl(name: string) {
 }
 
 export function normalizeRepo(repo: GithubRepo): Site | null {
-  if (!repo.has_pages) return null;
+  if (repo.private !== false || !repo.has_pages) return null;
   return {
     name: repo.name,
     description: repo.description?.trim() || "暂未填写网站简介",
@@ -49,7 +50,7 @@ export function filterSites(sites: Site[], query: string) {
 }
 
 export async function fetchSiteDirectory(fetcher = fetch): Promise<Site[]> {
-  const response = await fetcher(`https://api.github.com/users/${GITHUB_OWNER}/repos?per_page=100&sort=updated`, {
+  const response = await fetcher(`https://api.github.com/users/${GITHUB_OWNER}/repos?per_page=100&sort=updated&type=public`, {
     cache: "no-store",
   });
   if (!response.ok) throw new Error(`GitHub API ${response.status}`);
