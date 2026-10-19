@@ -1,29 +1,14 @@
-import { resolve } from "node:path";
 import { defineConfig } from "vite";
-import { rpgjs, tiledMapFolderPlugin } from "@rpgjs/vite";
-import startServer from "./src/world/server";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig({
   base: "/",
-  optimizeDeps: {
-    include: ["pixi.js > @xmldom/xmldom"],
-  },
-  plugins: [
-    tiledMapFolderPlugin({
-      sourceFolder: "./src/world/tiled",
-      publicPath: "/map",
-      buildOutputPath: "map",
-    }),
-    ...rpgjs({
-      server: startServer,
-      entryPoints: { rpg: "./src/entry.ts" },
-    }),
-  ],
-  build: {
-    rollupOptions: {
-      input: {
-        world: resolve(import.meta.dirname, "index.html"),
-      },
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
 });
